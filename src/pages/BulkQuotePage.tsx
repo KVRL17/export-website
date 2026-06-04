@@ -145,7 +145,7 @@ export default function BulkQuotePage() {
         <div
           className="page-hero-bg"
           style={{
-            backgroundImage: `url('https://images.pexels.com/photos/906982/pexels-photo-906982.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
+            backgroundImage: `url('https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
           }}
         />
         <div className="container-fluid px-4 px-lg-5 position-relative h-100 d-flex align-items-center">

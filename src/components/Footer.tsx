@@ -4,15 +4,14 @@ import { FaWhatsapp, FaLinkedin, FaFacebook, FaInstagram, FaTwitter } from 'reac
 
 const productLinks = [
   { label: 'Premium Basmati Rice', slug: 'basmati-rice' },
-  { label: 'IR 64 Parboiled Rice', slug: 'ir-64-parboiled-rice' },
-  { label: 'Sona Masoori Rice', slug: 'sona-masoori-rice' },
-  { label: 'Dry Red Chilli (Teja S17)', slug: 'dry-red-chilli' },
+  { label: 'Non-Basmati Rice', slug: 'non-basmati-rice' },
+  { label: 'Dried Red Chilles', slug: 'dry-red-chillies' },
   { label: 'Red Chilli Powder', slug: 'red-chilli-powder' },
   { label: 'Chilli Flakes', slug: 'chilli-flakes' },
 ];
 
 const quickLinks = [
-  { label: 'About Us', to: '/#about' },
+  // { label: 'About Us', to: '/#about' },
   { label: 'Products', to: '/products' },
   { label: 'Export Countries', to: '/#countries' },
   { label: 'Certifications', to: '/#certifications' },
@@ -43,7 +42,7 @@ export default function Footer() {
                   </div>
                 </div>
                 <p className="footer-desc">
-                  Premium quality rice and red chilli exporter from India. APEDA Registered, FSSAI & ISO Certified. Serving importers across 25+ countries with reliable supply chains since 2015.
+                  Akshyaa Global Exports Private Limited is an Indian export company specializing in premium-quality Rice, Red Chillies. We supply agricultural products to international buyers while maintaining high standards of quality, hygiene, packaging and timely delivery.
                 </p>
                 <div className="footer-socials">
                   <a href="#" aria-label="WhatsApp"><FaWhatsapp /></a>
@@ -91,20 +90,26 @@ export default function Footer() {
               <div className="footer-contact">
                 <div className="footer-contact-item">
                   <FiMapPin size={16} />
-                  <span>123 Export Hub, Guntur, Andhra Pradesh - 522001, India</span>
+                  <span>United Kingdom</span>
                 </div>
                 <div className="footer-contact-item">
                   <FiPhone size={16} />
-                  <a href="tel:+919999999999">+91 99999 99999</a>
+                  <a href="tel:+447763076666">+44 7763076666</a>
                 </div>
                 <div className="footer-contact-item">
                   <FiMail size={16} />
-                  <a href="mailto:exports@akshyaaglobal.com">exports@akshyaaglobal.com</a>
+                  <a href="mailto:info@akshyaaglobalexport.com">info@akshyaaglobalexport.com</a>
                 </div>
                 <div className="footer-contact-item">
                   <FaWhatsapp size={16} />
-                  <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer">WhatsApp Us</a>
-                </div>
+                  <a
+                    href="https://wa.me/447763076666?text=Hello%20Akshyaa%20Global%20Exports,%20I%20am%20interested%20in%20your%20export%20products.%20Please%20share%20more%20details."
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Whatsapp Us
+                  </a>
+                  </div>
               </div>
               <div className="footer-newsletter">
                 <h6>Get Export Updates</h6>
@@ -121,11 +126,13 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="container-fluid px-4 px-lg-5">
           <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-            <p className="mb-0">© 2024 Akshyaa Global Exports. All rights reserved.</p>
+            <p className="mb-0">
+              © {new Date().getFullYear()} Akshyaa Global Exports. Connecting Markets Worldwide.
+            </p>
             <div className="footer-cert-badges">
               <span>APEDA Registered</span>
               <span>FSSAI Certified</span>
-              <span>ISO 9001:2015</span>
+              <span>ISO 9001:2025</span>
               <span>HALAL Certified</span>
             </div>
             <div className="footer-bottom-links">

@@ -10,7 +10,7 @@ export default function FloatingActions() {
     <div className="floating-actions">
       {/* WhatsApp */}
       <motion.a
-        href="https://wa.me/919999999999?text=Hello%2C%20I%27m%20interested%20in%20your%20export%20products."
+        href="https://wa.me/447763076666?text=Hello%20Akshyaa%20Global%20Exports,%20I%20am%20interested%20in%20your%20products.%20Please%20share%20more%20details."
         target="_blank"
         rel="noreferrer"
         className="fab fab-whatsapp"
@@ -23,7 +23,7 @@ export default function FloatingActions() {
 
       {/* Call */}
       <motion.a
-        href="tel:+919999999999"
+        href="tel:+447763076666"
         className="fab fab-call"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}

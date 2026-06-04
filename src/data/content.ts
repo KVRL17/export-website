@@ -9,6 +9,8 @@ import flagMy from '../images/flag-my.svg';
 import flagAu from '../images/flag-au.svg';
 import flagCa from '../images/flag-ca.svg';
 import worldMap from '../images/worldmapgoods.jpg';
+import basmatirice from '../images/basmatirice3.jpg';
+import rc33 from '../images/rc32.jpg';
 
 export interface Testimonial {
   id: string;
@@ -96,13 +98,13 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     id: '1',
-    slug: 'global-basmati-rice-market-2024',
-    title: 'Global Basmati Rice Market: Trends & Opportunities in 2024',
+    slug: 'global-basmati-rice-market-2026',
+    title: 'Global Basmati Rice Market: Trends & Opportunities in 2026',
     excerpt: 'India dominates 65% of global basmati rice exports. Explore key importing nations, price trends, and how Indian exporters can capitalize on growing demand.',
     content: '',
-    image: 'https://images.pexels.com/photos/7421215/pexels-photo-7421215.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: basmatirice,
     category: 'Market Trends',
-    date: 'March 15, 2024',
+    date: 'March 15, 2026',
     readTime: '6 min read',
     author: 'Akshyaa Export Team',
   },
@@ -112,9 +114,9 @@ export const blogPosts: BlogPost[] = [
     title: 'Red Chilli Demand Surges 18% in Middle East & Southeast Asia',
     excerpt: 'Growing appetite for spicy food across the Middle East and Southeast Asia is driving unprecedented demand for Indian red chillies. Here\'s what importers need to know.',
     content: '',
-    image: 'https://images.pexels.com/photos/2821823/pexels-photo-2821823.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: rc33,
     category: 'Industry News',
-    date: 'February 28, 2024',
+    date: 'February 28, 2026',
     readTime: '5 min read',
     author: 'Akshyaa Export Team',
   },
@@ -126,19 +128,19 @@ export const blogPosts: BlogPost[] = [
     content: '',
     image: 'https://images.pexels.com/photos/6863332/pexels-photo-6863332.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Export Guide',
-    date: 'January 20, 2024',
+    date: 'January 20, 2026',
     readTime: '8 min read',
     author: 'Akshyaa Export Team',
   },
   {
     id: '4',
-    slug: 'shipping-update-2024',
-    title: 'Global Shipping Updates: Container Availability & Lead Times 2024',
+    slug: 'shipping-update-2026',
+    title: 'Global Shipping Updates: Container Availability & Lead Times 2026',
     excerpt: 'Post-pandemic shipping normalization means better container availability from India. Understand current freight rates and lead times for your import planning.',
     content: '',
     image: 'https://images.pexels.com/photos/906982/pexels-photo-906982.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Shipping',
-    date: 'January 10, 2024',
+    date: 'January 10, 2026',
     readTime: '4 min read',
     author: 'Akshyaa Export Team',
   },
@@ -150,7 +152,7 @@ export const blogPosts: BlogPost[] = [
     content: '',
     image: 'https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Packaging',
-    date: 'December 5, 2023',
+    date: 'December 5, 2025',
     readTime: '5 min read',
     author: 'Akshyaa Export Team',
   },
@@ -162,7 +164,7 @@ export const blogPosts: BlogPost[] = [
     content: '',
     image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Certifications',
-    date: 'November 20, 2023',
+    date: 'November 20, 2025',
     readTime: '6 min read',
     author: 'Akshyaa Export Team',
   },

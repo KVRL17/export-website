@@ -26,7 +26,7 @@ export default function HomePage() {
       <ExportCountries />
       <Certifications />
       <Testimonials />
-      <BlogSection limit={3} />
+      <BlogSection limit={4} />
     </main>
   );
 }

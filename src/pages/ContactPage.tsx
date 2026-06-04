@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiPhone, FiMail, FiMapPin, FiClock, FiSend } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
-import emailjs from '@emailjs/browser';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', company: '', phone: '', subject: '', message: '' });
@@ -10,16 +9,55 @@ export default function ContactPage() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
 
+  const validateForm = () => {
+    if (!form.name.trim()) return 'Please enter your full name.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return 'Please enter a valid email address.';
+    if (form.phone.trim() && !/^[+\d\s()-]{7,}$/.test(form.phone.trim())) return 'Please enter a valid phone number.';
+    if (!form.subject.trim()) return 'Please enter a subject.';
+    if (!form.message.trim() || form.message.trim().length < 10) return 'Please enter a message with at least 10 characters.';
+    return '';
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSending(true);
     setError('');
+
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setSending(true);
+
     try {
-      await emailjs.send('YOUR_SERVICE_ID', 'YOUR_CONTACT_TEMPLATE_ID', form, 'YOUR_PUBLIC_KEY');
+      const response = await fetch('https://formsubmit.co/ajax/venkataramanakarri.official@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          phone: form.phone,
+          subject: form.subject,
+          message: form.message,
+          _subject: `New Contact Request from ${form.name}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('FormSubmit request failed');
+      }
+
       setSent(true);
       setForm({ name: '', email: '', company: '', phone: '', subject: '', message: '' });
     } catch {
-      setError('Failed to send. Please email us directly at exports@akshyaaglobal.com');
+      setError('Failed to send. Please email us directly at info@akshyaaglobalexport.com');
     } finally {
       setSending(false);
     }
@@ -28,11 +66,10 @@ export default function ContactPage() {
   const update = (field: string, val: string) => setForm((prev) => ({ ...prev, [field]: val }));
 
   const contactInfo = [
-    { icon: FiPhone, label: 'Call Us', value: '+91 99999 99999', href: 'tel:+919999999999' },
-    { icon: FiMail, label: 'Email Us', value: 'exports@akshyaaglobal.com', href: 'mailto:exports@akshyaaglobal.com' },
-    { icon: FaWhatsapp, label: 'WhatsApp', value: '+91 99999 99999', href: 'https://wa.me/919999999999' },
-    { icon: FiMapPin, label: 'Office Address', value: '123 Export Hub, Guntur, AP - 522001, India', href: '#' },
-    { icon: FiClock, label: 'Working Hours', value: 'Mon–Sat: 9 AM – 7 PM IST', href: '#' },
+    { icon: FiPhone, label: 'Phone Number', value: '+44 7763076666', href: 'tel:+447763076666' },
+    { icon: FiMail, label: 'Email', value: 'info@akshyaaglobalexport.com', href: 'mailto:info@akshyaaglobalexport.com' },
+    { icon: FiMapPin, label: 'Office Address', value: 'Uk', href: '#' },
+    { icon: FiClock, label: 'Working Hours', value: 'Monday – Saturday\n09:00 AM – 06:00 PM', href: '#' },
   ];
 
   return (
@@ -42,7 +79,7 @@ export default function ContactPage() {
         <div
           className="page-hero-bg"
           style={{
-            backgroundImage: `url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
+            backgroundImage: `url('https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
           }}
         />
         <div className="container-fluid px-4 px-lg-5 position-relative h-100 d-flex align-items-center">
@@ -138,7 +175,7 @@ export default function ContactPage() {
           <div className="map-placeholder">
             <div className="map-placeholder-inner">
               <FiMapPin size={32} opacity={0.4} />
-              <p>123 Export Hub, Guntur, Andhra Pradesh - 522001, India</p>
+              <p>Uk</p>
               <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="btn-hero-outline">
                 Open in Google Maps
               </a>

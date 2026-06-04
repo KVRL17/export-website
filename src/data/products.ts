@@ -1,4 +1,4 @@
-import basmatiRice1 from '../images/basmatirice1.jpg';
+import basmatiRice1 from '../images/basmatirice9.jpg';
 import basmatiRice2 from '../images/basmatirice2.jpg';
 import basmatiRice3 from '../images/basmatirice3.jpg';
 import rice21 from '../images/rice21.jpg';
@@ -42,7 +42,7 @@ export const products: Product[] = [
     slug: 'basmati-rice',
     name: 'Premium Basmati Rice',
     category: 'rice',
-    grade: 'Export Grade A',
+    grade: 'A',
     moq: '25 MT',
     packaging: ['25 kg PP Bags', '50 kg Jute Bags', '5 kg Consumer Pack'],
     countries: ['USA', 'UK', 'UAE', 'Saudi Arabia', 'Qatar'],
@@ -62,10 +62,10 @@ export const products: Product[] = [
       'Foreign Matter': 'Nil',
       'Aroma': 'Natural Basmati Fragrance',
       'Variety': '1121 / PB-1 / Pusa',
-      'Crop Year': '2024',
+      'Crop Year': '2026',
     },
     containerCapacity: '25 MT per 20ft Container | 27.5 MT per 40ft Container',
-    certifications: ['APEDA', 'FSSAI', 'ISO 9001:2015', 'Phytosanitary Certificate'],
+    certifications: ['APEDA', 'FSSAI', 'ISO 9001:2025', 'Phytosanitary Certificate'],
     faqs: [
       { question: 'What is the minimum order quantity?', answer: 'Our MOQ is 25 MT per order. We can accommodate smaller trial orders upon request.' },
       { question: 'Do you provide samples?', answer: 'Yes, we provide free samples (500g-1kg) for qualified buyers. Courier charges apply.' },
@@ -80,7 +80,7 @@ export const products: Product[] = [
     slug: 'ir-64-parboiled-rice',
     name: 'Non-Basmati Rice',
     category: 'rice',
-    grade: 'Export Grade A',
+    grade: 'A',
     moq: '25 MT',
     packaging: ['25 kg PP Bags', '50 kg Jute Bags'],
     countries: ['UK', 'USA', 'UAE', 'Malaysia', 'Singapore'],
@@ -149,7 +149,7 @@ export const products: Product[] = [
     slug: 'dry-red-chilli',
     name: 'Dried Red Chillies',
     category: 'chillies',
-    grade: 'Export Grade A',
+    grade: 'A',
     moq: '5 MT',
     packaging: ['25 kg PP Bags', '50 kg Bales', '10 kg Cartons'],
     countries: ['USA', 'UK', 'UAE', 'Qatar', 'Oman', 'Malaysia'],
@@ -219,7 +219,7 @@ export const products: Product[] = [
     slug: 'red-chilli-powder',
     name: 'Chilli Powder',
     category: 'powders',
-    grade: 'Premium Export Grade',
+    grade: 'Premium',
     moq: '5 MT',
     packaging: ['1 kg PP Bags', '5 kg Tin', '25 kg PP Bags'],
     countries: ['USA', 'UK', 'UAE', 'Qatar', 'Oman', 'Singapore'],
@@ -253,7 +253,7 @@ export const products: Product[] = [
     slug: 'chilli-flakes',
     name: 'Red Chilli Flakes',
     category: 'flakes',
-    grade: 'Premium Export Grade',
+    grade: 'Premium',
     moq: '3 MT',
     packaging: ['100g Shaker', '500g Bag', '1 kg Bag', '25 kg PP Bag'],
     countries: ['USA', 'UK', 'Italy', 'UAE', 'Australia'],

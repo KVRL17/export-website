@@ -113,6 +113,7 @@ export default function ProductDetailPage() {
                     ))}
                   </div>
                 </div>
+                <br />
 
                 <div className="detail-countries mb-4">
                   <h6>Countries Exported To</h6>
