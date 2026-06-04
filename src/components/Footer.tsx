@@ -40,7 +40,7 @@ export default function Footer() {
     setSubscribeMessage('');
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/info@akshyaaglobalexport.com', {
+      const response = await fetch('https://formsubmit.co/ajax/akshay_aa@outlook.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export default function Footer() {
       setSubscribeMessage('Thank you for subscribing. We will send export updates to your email soon.');
       setEmail('');
     } catch {
-      setSubscribeMessage('Subscription failed. Please email us directly at info@akshyaaglobalexport.com');
+      setSubscribeMessage('Subscription failed. Please email us directly at akshay_aa@outlook.com');
     } finally {
       setSubmitting(false);
     }
@@ -145,7 +145,7 @@ export default function Footer() {
                 </div>
                 <div className="footer-contact-item">
                   <FiMail size={16} />
-                  <a href="mailto:info@akshyaaglobalexport.com">info@akshyaaglobalexport.com</a>
+                  <a href="mailto:akshay_aa@outlook.com">akshay_aa@outlook.com</a>
                 </div>
                 <div className="footer-contact-item">
                   <FaWhatsapp size={16} />

@@ -40,9 +40,9 @@ export default function Navbar() {
                 <FiPhone size={13} />
                 <span>+44 7763076666</span>
               </a>
-              <a href="mailto:info@akshyaaglobalexport.com" className="topbar-link">
+              <a href="mailto:akshay_aa@outlook.com" className="topbar-link">
                 <FiMail size={13} />
-                <span>info@akshyaaglobalexport.com</span>
+                <span>akshay_aa@outlook.com</span>
               </a>
             </div>
             <div className="d-none d-md-flex gap-3 align-items-center">

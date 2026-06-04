@@ -31,7 +31,7 @@ export default function ContactPage() {
     setSending(true);
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/info@akshyaaglobalexport.com', {
+      const response = await fetch('https://formsubmit.co/ajax/akshay_aa@outlook.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export default function ContactPage() {
       setSent(true);
       setForm({ name: '', email: '', company: '', phone: '', subject: '', message: '' });
     } catch {
-      setError('Failed to send. Please email us directly at info@akshyaaglobalexport.com');
+      setError('Failed to send. Please email us directly at akshay_aa@outlook.com');
     } finally {
       setSending(false);
     }
@@ -67,7 +67,7 @@ export default function ContactPage() {
 
   const contactInfo = [
     { icon: FiPhone, label: 'Phone Number', value: '+44 7763076666', href: 'tel:+447763076666' },
-    { icon: FiMail, label: 'Email', value: 'info@akshyaaglobalexport.com', href: 'mailto:info@akshyaaglobalexport.com' },
+    { icon: FiMail, label: 'Email', value: 'akshay_aa@outlook.com', href: 'mailto:akshay_aa@outlook.com' },
     { icon: FiMapPin, label: 'Office Address', value: 'Uk', href: '#' },
     { icon: FiClock, label: 'Working Hours', value: 'Monday – Saturday\n09:00 AM – 06:00 PM', href: '#' },
   ];

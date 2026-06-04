@@ -192,7 +192,7 @@ export function BulkQuoteForm({
     };
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/info@akshyaaglobalexport.com', {
+      const response = await fetch('https://formsubmit.co/ajax/akshay_aa@outlook.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -207,7 +207,7 @@ export function BulkQuoteForm({
 
       setSubmitted(true);
     } catch {
-      setError('Failed to send inquiry. Please email us directly at info@akshyaaglobalexport.com');
+      setError('Failed to send inquiry. Please email us directly at akshay_aa@outlook.com');
     } finally {
       setSubmitting(false);
     }
