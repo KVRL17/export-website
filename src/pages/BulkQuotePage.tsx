@@ -1,0 +1,401 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiArrowRight, FiArrowLeft, FiCheck, FiSend } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
+import { products } from '../data/products';
+import { useInquiryCart } from '../context/InquiryCartContext';
+
+const steps = ['Business Details', 'Select Products', 'Quantity & Delivery', 'Requirements'];
+
+const countries = [
+  'United States', 'United Kingdom', 'UAE', 'Saudi Arabia', 'Qatar', 'Oman',
+  'Kuwait', 'Bahrain', 'Malaysia', 'Singapore', 'Australia', 'Canada',
+  'Germany', 'France', 'Italy', 'Netherlands', 'Japan', 'South Korea', 'Other'
+];
+
+interface FormData {
+  companyName: string;
+  buyerName: string;
+  country: string;
+  email: string;
+  phone: string;
+  selectedProducts: string[];
+  quantities: Record<string, string>;
+  deliveryPort: string;
+  paymentTerms: string;
+  requirements: string;
+}
+
+const initialForm: FormData = {
+  companyName: '',
+  buyerName: '',
+  country: '',
+  email: '',
+  phone: '',
+  selectedProducts: [],
+  quantities: {},
+  deliveryPort: '',
+  paymentTerms: '',
+  requirements: '',
+};
+
+export default function BulkQuotePage() {
+  const [step, setStep] = useState(0);
+  const [form, setForm] = useState<FormData>(initialForm);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const { items } = useInquiryCart();
+
+  const updateField = (field: keyof FormData, value: string) =>
+    setForm((prev) => ({ ...prev, [field]: value }));
+
+  const toggleProduct = (id: string) => {
+    setForm((prev) => ({
+      ...prev,
+      selectedProducts: prev.selectedProducts.includes(id)
+        ? prev.selectedProducts.filter((p) => p !== id)
+        : [...prev.selectedProducts, id],
+    }));
+  };
+
+  const canNext = () => {
+    if (step === 0) return form.companyName && form.buyerName && form.country && form.email && form.phone;
+    if (step === 1) return form.selectedProducts.length > 0;
+    if (step === 2) return form.deliveryPort;
+    return true;
+  };
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    setError('');
+    const selectedNames = form.selectedProducts.map((id) => {
+      const p = products.find((pr) => pr.id === id);
+      const qty = form.quantities[id] || p?.moq || 'N/A';
+      return `${p?.name}: ${qty}`;
+    }).join('\n');
+
+    const templateParams = {
+      company_name: form.companyName,
+      buyer_name: form.buyerName,
+      country: form.country,
+      email: form.email,
+      phone: form.phone,
+      products: selectedNames,
+      delivery_port: form.deliveryPort,
+      payment_terms: form.paymentTerms || 'Not specified',
+      requirements: form.requirements || 'None',
+      timestamp: new Date().toLocaleString(),
+    };
+
+    try {
+      await emailjs.send(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        templateParams,
+        'YOUR_PUBLIC_KEY'
+      );
+      setSubmitted(true);
+    } catch {
+      setError('Failed to send inquiry. Please email us directly at exports@akshyaaglobal.com');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (submitted) {
+    return (
+      <main className="page-main">
+        <div className="container-fluid px-4 px-lg-5 py-5">
+          <div className="quote-success">
+            <motion.div
+              className="success-icon"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+            >
+              <FiCheck size={48} />
+            </motion.div>
+            <h2>Quote Request Received!</h2>
+            <p>Thank you, <strong>{form.buyerName}</strong>. We have received your bulk quote request and our export team will respond within <strong>24 hours</strong> with a detailed pro-forma invoice.</p>
+            <p className="text-muted">Check your email at <strong>{form.email}</strong></p>
+            <button onClick={() => { setSubmitted(false); setForm(initialForm); setStep(0); }} className="btn-hero-outline mt-4">
+              Submit Another Inquiry
+            </button>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="page-main">
+      <div className="page-hero-banner page-hero-sm">
+        <div className="page-hero-overlay" />
+        <div
+          className="page-hero-bg"
+          style={{
+            backgroundImage: `url('https://images.pexels.com/photos/906982/pexels-photo-906982.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
+          }}
+        />
+        <div className="container-fluid px-4 px-lg-5 position-relative h-100 d-flex align-items-center">
+          <div>
+            <span className="section-eyebrow section-eyebrow-light">B2B Export Inquiry</span>
+            <h1 className="page-banner-title">Request Bulk Quote</h1>
+            <p className="page-banner-subtitle">Get competitive FOB/CIF pricing for bulk export orders.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-fluid px-4 px-lg-5 py-5">
+        <div className="quote-form-wrapper">
+          {/* Step indicators */}
+          <div className="step-indicators">
+            {steps.map((s, i) => (
+              <div key={s} className={`step-indicator ${i === step ? 'active' : i < step ? 'done' : ''}`}>
+                <div className="step-bubble">
+                  {i < step ? <FiCheck size={14} /> : <span>{i + 1}</span>}
+                </div>
+                <span className="step-label">{s}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Form Steps */}
+          <div className="quote-form-body">
+            <AnimatePresence mode="wait">
+              {step === 0 && (
+                <motion.div
+                  key="step0"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  className="step-content"
+                >
+                  <h3 className="step-title">Business Details</h3>
+                  <div className="row g-3">
+                    <div className="col-md-6">
+                      <label className="form-label-custom">Company Name *</label>
+                      <input
+                        type="text"
+                        className="form-input-custom"
+                        value={form.companyName}
+                        onChange={(e) => updateField('companyName', e.target.value)}
+                        placeholder="Your company name"
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label-custom">Buyer Name *</label>
+                      <input
+                        type="text"
+                        className="form-input-custom"
+                        value={form.buyerName}
+                        onChange={(e) => updateField('buyerName', e.target.value)}
+                        placeholder="Your full name"
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label-custom">Country *</label>
+                      <select
+                        className="form-input-custom"
+                        value={form.country}
+                        onChange={(e) => updateField('country', e.target.value)}
+                      >
+                        <option value="">Select your country</option>
+                        {countries.map((c) => (
+                          <option key={c} value={c}>{c}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label-custom">Business Email *</label>
+                      <input
+                        type="email"
+                        className="form-input-custom"
+                        value={form.email}
+                        onChange={(e) => updateField('email', e.target.value)}
+                        placeholder="business@company.com"
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label-custom">Phone / WhatsApp *</label>
+                      <input
+                        type="tel"
+                        className="form-input-custom"
+                        value={form.phone}
+                        onChange={(e) => updateField('phone', e.target.value)}
+                        placeholder="+1 234 567 8900"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {step === 1 && (
+                <motion.div
+                  key="step1"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  className="step-content"
+                >
+                  <h3 className="step-title">Select Products</h3>
+                  <div className="products-select-grid">
+                    {products.map((p) => (
+                      <div
+                        key={p.id}
+                        className={`product-select-card ${form.selectedProducts.includes(p.id) ? 'selected' : ''}`}
+                        onClick={() => toggleProduct(p.id)}
+                      >
+                        <img src={p.image} alt={p.name} />
+                        <div className="product-select-info">
+                          <div className="product-select-name">{p.name}</div>
+                          <div className="product-select-moq">MOQ: {p.moq}</div>
+                        </div>
+                        {form.selectedProducts.includes(p.id) && (
+                          <div className="product-select-check"><FiCheck size={14} /></div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  {items.length > 0 && (
+                    <p className="text-muted small mt-3">
+                      Tip: You had {items.length} item(s) in your inquiry cart. They are pre-selectable above.
+                    </p>
+                  )}
+                </motion.div>
+              )}
+
+              {step === 2 && (
+                <motion.div
+                  key="step2"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  className="step-content"
+                >
+                  <h3 className="step-title">Quantity & Delivery</h3>
+                  <div className="row g-3">
+                    {form.selectedProducts.map((id) => {
+                      const p = products.find((pr) => pr.id === id);
+                      if (!p) return null;
+                      return (
+                        <div key={id} className="col-md-6">
+                          <label className="form-label-custom">{p.name} Quantity</label>
+                          <input
+                            type="text"
+                            className="form-input-custom"
+                            value={form.quantities[id] || ''}
+                            onChange={(e) =>
+                              setForm((prev) => ({
+                                ...prev,
+                                quantities: { ...prev.quantities, [id]: e.target.value },
+                              }))
+                            }
+                            placeholder={`e.g. ${p.moq}`}
+                          />
+                        </div>
+                      );
+                    })}
+                    <div className="col-md-6">
+                      <label className="form-label-custom">Destination Port *</label>
+                      <input
+                        type="text"
+                        className="form-input-custom"
+                        value={form.deliveryPort}
+                        onChange={(e) => updateField('deliveryPort', e.target.value)}
+                        placeholder="e.g. Dubai Port, Jebel Ali"
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label-custom">Preferred Payment Terms</label>
+                      <select
+                        className="form-input-custom"
+                        value={form.paymentTerms}
+                        onChange={(e) => updateField('paymentTerms', e.target.value)}
+                      >
+                        <option value="">Select payment terms</option>
+                        <option value="LC at Sight">LC at Sight</option>
+                        <option value="30% TT advance + 70% BL">30% TT advance + 70% BL</option>
+                        <option value="100% TT Advance">100% TT Advance</option>
+                        <option value="CAD / DA 30">CAD / DA 30</option>
+                      </select>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {step === 3 && (
+                <motion.div
+                  key="step3"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  className="step-content"
+                >
+                  <h3 className="step-title">Additional Requirements</h3>
+                  <div className="row g-3">
+                    <div className="col-12">
+                      <label className="form-label-custom">Special Requirements / Notes</label>
+                      <textarea
+                        className="form-input-custom"
+                        rows={6}
+                        value={form.requirements}
+                        onChange={(e) => updateField('requirements', e.target.value)}
+                        placeholder="e.g. Custom packaging, Private labeling, Specific certifications required, Delivery urgency, Quality standards..."
+                      />
+                    </div>
+                  </div>
+
+                  {/* Summary */}
+                  <div className="quote-summary mt-4">
+                    <h5>Order Summary</h5>
+                    <div className="summary-row"><strong>Company:</strong> {form.companyName}</div>
+                    <div className="summary-row"><strong>Buyer:</strong> {form.buyerName}</div>
+                    <div className="summary-row"><strong>Country:</strong> {form.country}</div>
+                    <div className="summary-row"><strong>Email:</strong> {form.email}</div>
+                    <div className="summary-row"><strong>Products:</strong> {form.selectedProducts.length} selected</div>
+                    <div className="summary-row"><strong>Destination:</strong> {form.deliveryPort}</div>
+                  </div>
+
+                  {error && <div className="alert alert-danger mt-3">{error}</div>}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation */}
+          <div className="quote-form-footer">
+            <button
+              className="btn-step-back"
+              onClick={() => setStep((s) => Math.max(0, s - 1))}
+              disabled={step === 0}
+            >
+              <FiArrowLeft size={16} /> Back
+            </button>
+
+            {step < 3 ? (
+              <button
+                className="btn-step-next"
+                onClick={() => setStep((s) => s + 1)}
+                disabled={!canNext()}
+              >
+                Next <FiArrowRight size={16} />
+              </button>
+            ) : (
+              <button
+                className="btn-step-submit"
+                onClick={handleSubmit}
+                disabled={submitting}
+              >
+                {submitting ? 'Sending...' : (
+                  <><FiSend size={16} /> Submit Request</>
+                )}
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
