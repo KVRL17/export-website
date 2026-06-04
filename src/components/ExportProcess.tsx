@@ -8,7 +8,7 @@ const steps = [
     title: 'Product Selection',
     description: 'Browse our catalog and select products with required specifications, grade, and packaging.',
     icon: '🔍',
-    color: '#0A2540',
+    color: '#3b8cdd',
   },
   {
     number: '02',
@@ -29,7 +29,7 @@ const steps = [
     title: 'Packaging',
     description: 'Products are cleaned, graded, packed in your specified bags, and quality-checked.',
     icon: '📦',
-    color: '#0A2540',
+    color: '#3b8cdd',
   },
   {
     number: '05',

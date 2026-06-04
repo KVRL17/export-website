@@ -1,3 +1,15 @@
+import flagUs from '../images/flag-us.svg';
+import flagGb from '../images/flag-gb.svg';
+import flagAe from '../images/flag-ae.svg';
+import flagSa from '../images/flag-sa.svg';
+import flagQa from '../images/flag-qa.svg';
+import flagOm from '../images/flag-om.svg';
+import flagSg from '../images/flag-sg.svg';
+import flagMy from '../images/flag-my.svg';
+import flagAu from '../images/flag-au.svg';
+import flagCa from '../images/flag-ca.svg';
+import worldMap from '../images/worldmapgoods.jpg';
+
 export interface Testimonial {
   id: string;
   name: string;
@@ -157,17 +169,19 @@ export const blogPosts: BlogPost[] = [
 ];
 
 export const exportCountries = [
-  { name: 'USA', code: 'US', x: 22, y: 38, products: ['Basmati Rice', 'Red Chilli', 'Chilli Powder'] },
-  { name: 'UK', code: 'GB', x: 47, y: 28, products: ['Basmati Rice', 'Chilli Flakes', 'Red Chilli Powder'] },
-  { name: 'UAE', code: 'AE', x: 60, y: 43, products: ['Basmati Rice', 'Teja Chilli', 'Sona Masoori'] },
-  { name: 'Saudi Arabia', code: 'SA', x: 58, y: 46, products: ['Basmati Rice', 'Red Chilli', 'Chilli Powder'] },
-  { name: 'Qatar', code: 'QA', x: 61, y: 45, products: ['Basmati Rice', 'Red Chilli Powder'] },
-  { name: 'Oman', code: 'OM', x: 63, y: 47, products: ['Basmati Rice', 'Red Chilli'] },
-  { name: 'Singapore', code: 'SG', x: 77, y: 58, products: ['Sona Masoori', 'Chilli Products'] },
-  { name: 'Malaysia', code: 'MY', x: 76, y: 56, products: ['IR 64 Parboiled', 'Red Chilli'] },
-  { name: 'Australia', code: 'AU', x: 82, y: 72, products: ['Sona Masoori', 'Chilli Flakes'] },
-  { name: 'Canada', code: 'CA', x: 18, y: 30, products: ['Basmati Rice', 'Chilli Products'] },
+  { name: 'USA', code: 'US', flag: flagUs, x: 22, y: 38, products: ['Basmati Rice', 'Red Chilli', 'Chilli Powder'] },
+  { name: 'UK', code: 'GB', flag: flagGb, x: 47, y: 28, products: ['Basmati Rice', 'Chilli Flakes', 'Red Chilli Powder'] },
+  { name: 'UAE', code: 'AE', flag: flagAe, x: 60, y: 43, products: ['Basmati Rice', 'Teja Chilli', 'Sona Masoori'] },
+  { name: 'Saudi Arabia', code: 'SA', flag: flagSa, x: 58, y: 46, products: ['Basmati Rice', 'Red Chilli', 'Chilli Powder'] },
+  { name: 'Qatar', code: 'QA', flag: flagQa, x: 61, y: 45, products: ['Basmati Rice', 'Red Chilli Powder'] },
+  { name: 'Oman', code: 'OM', flag: flagOm, x: 63, y: 47, products: ['Basmati Rice', 'Red Chilli'] },
+  { name: 'Singapore', code: 'SG', flag: flagSg, x: 77, y: 58, products: ['Sona Masoori', 'Chilli Products'] },
+  { name: 'Malaysia', code: 'MY', flag: flagMy, x: 76, y: 56, products: ['IR 64 Parboiled', 'Red Chilli'] },
+  { name: 'Australia', code: 'AU', flag: flagAu, x: 82, y: 72, products: ['Sona Masoori', 'Chilli Flakes'] },
+  { name: 'Canada', code: 'CA', flag: flagCa, x: 18, y: 30, products: ['Basmati Rice', 'Chilli Products'] },
 ];
+
+export const worldMapImage = worldMap;
 
 export const certifications = [
   {

@@ -4,26 +4,27 @@ import { motion } from 'framer-motion';
 import { FiArrowRight, FiPackage } from 'react-icons/fi';
 import { FaLeaf } from 'react-icons/fa';
 import { gsap } from 'gsap';
+import riceImage from '../images/rice1.jpeg';
 
 const floatingCards = [
   {
     icon: '🌾',
-    title: 'Premium Basmati',
-    sub: 'Grade A Export',
+    title: 'Premium Basmati Rice',
+    sub: 'Long Grain • Aromatic',
     color: '#00A651',
     delay: 0,
   },
   {
-    icon: '🌶️',
-    title: 'Teja Red Chilli',
-    sub: 'ASTA 100-120',
+    icon: '⭐',
+    title: 'Export Grade Quality',
+    sub: 'APEDA Certified',
     color: '#FF6B00',
     delay: 0.3,
   },
   {
-    icon: '🌶️',
-    title: 'Chilli Powder',
-    sub: 'HACCP Certified',
+    icon: '📦',
+    title: 'Bulk Supply Ready',
+    sub: '25+ Countries Served',
     color: '#0A2540',
     delay: 0.6,
   },
@@ -71,7 +72,7 @@ export default function Hero() {
       <div
         className="hero-bg-image"
         style={{
-          backgroundImage: `url('https://images.pexels.com/photos/906982/pexels-photo-906982.jpeg?auto=compress&cs=tinysrgb&w=1920')`,
+          backgroundImage: `url(${riceImage})`,
         }}
       />
 
@@ -135,7 +136,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <img
-                  src="https://images.pexels.com/photos/7421215/pexels-photo-7421215.jpeg?auto=compress&cs=tinysrgb&w=700"
+                  src={riceImage}
                   alt="Premium Basmati Rice"
                   loading="eager"
                 />

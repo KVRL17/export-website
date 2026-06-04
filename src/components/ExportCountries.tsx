@@ -1,11 +1,7 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { exportCountries } from '../data/content';
 
 export default function ExportCountries() {
-  const [hovered, setHovered] = useState<string | null>(null);
-  const selected = exportCountries.find((c) => c.name === hovered);
-
   return (
     <section className="countries-section py-5" id="countries">
       <div className="container-fluid px-4 px-lg-5">
@@ -17,54 +13,7 @@ export default function ExportCountries() {
           </p>
         </div>
 
-        <div className="world-map-container">
-          {/* World Map SVG */}
-          <div className="world-map-wrap">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1200px-World_map_-_low_resolution.svg.png"
-              alt="World Map"
-              className="world-map-img"
-            />
-            {/* Animated pins */}
-            {exportCountries.map((country) => (
-              <motion.div
-                key={country.code}
-                className="map-pin"
-                style={{ left: `${country.x}%`, top: `${country.y}%` }}
-                onMouseEnter={() => setHovered(country.name)}
-                onMouseLeave={() => setHovered(null)}
-                animate={{ scale: hovered === country.name ? 1.5 : 1 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className={`pin-dot ${hovered === country.name ? 'pin-active' : ''}`} />
-                <motion.div
-                  className="pin-ring"
-                  animate={{ scale: [1, 2, 1], opacity: [0.8, 0, 0.8] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <div className="pin-label">{country.name}</div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Tooltip */}
-          {selected && (
-            <motion.div
-              className="map-tooltip"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <strong>{selected.name}</strong>
-              <div className="tooltip-products">
-                {selected.products.map((p) => (
-                  <span key={p} className="tooltip-product-tag">{p}</span>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </div>
-
-        {/* Country grid */}
+        {/* Country grid only */}
         <div className="row g-3 mt-4">
           {exportCountries.map((country, i) => (
             <div key={country.code} className="col-6 col-md-4 col-lg-2">
@@ -75,18 +24,7 @@ export default function ExportCountries() {
                 transition={{ delay: i * 0.06 }}
                 whileHover={{ scale: 1.04 }}
               >
-                <div className="country-flag">
-                  {country.code === 'US' && '🇺🇸'}
-                  {country.code === 'GB' && '🇬🇧'}
-                  {country.code === 'AE' && '🇦🇪'}
-                  {country.code === 'SA' && '🇸🇦'}
-                  {country.code === 'QA' && '🇶🇦'}
-                  {country.code === 'OM' && '🇴🇲'}
-                  {country.code === 'SG' && '🇸🇬'}
-                  {country.code === 'MY' && '🇲🇾'}
-                  {country.code === 'AU' && '🇦🇺'}
-                  {country.code === 'CA' && '🇨🇦'}
-                </div>
+                <img src={country.flag} alt={`${country.name} flag`} className="country-flag" />
                 <div className="country-name">{country.name}</div>
                 <div className="country-products">{country.products.length} Products</div>
               </motion.div>

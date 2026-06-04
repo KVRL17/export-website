@@ -2,7 +2,8 @@ import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowLeft, FiClock, FiTag, FiArrowRight } from 'react-icons/fi';
 import { blogPosts } from '../data/content';
-
+import basmatiRice1 from '../images/basmatirice1.jpg';
+import rc33 from '../images/rc33.jpg';
 function BlogListPage() {
   return (
     <main className="page-main">
@@ -11,7 +12,7 @@ function BlogListPage() {
         <div
           className="page-hero-bg"
           style={{
-            backgroundImage: `url('https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
+            backgroundImage: `url(${basmatiRice1})`,
           }}
         />
         <div className="container-fluid px-4 px-lg-5 position-relative h-100 d-flex align-items-center">

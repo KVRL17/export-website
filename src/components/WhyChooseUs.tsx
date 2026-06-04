@@ -11,8 +11,6 @@ const features = [
     title: 'Premium Quality',
     description: 'Every batch undergoes rigorous quality testing. Grade A certified with full COA documentation.',
     color: '#00A651',
-    large: true,
-    image: 'https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     icon: FiGlobe,
@@ -47,8 +45,6 @@ const features = [
     title: '24x7 Support',
     description: 'Dedicated account managers available round-the-clock for your inquiries and updates.',
     color: '#FF6B00',
-    large: true,
-    image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
 ];
 
@@ -74,17 +70,11 @@ export default function WhyChooseUs() {
             return (
               <motion.div
                 key={f.title}
-                className={`bento-card ${f.large ? 'bento-card-large' : ''}`}
+                className="bento-card"
                 data-aos="fade-up"
                 data-aos-delay={i * 80}
                 whileHover={{ y: -6, transition: { duration: 0.25 } }}
               >
-                {f.image && (
-                  <div className="bento-bg">
-                    <img src={f.image} alt={f.title} loading="lazy" />
-                    <div className="bento-bg-overlay" />
-                  </div>
-                )}
                 <div className="bento-content">
                   <div className="bento-icon" style={{ background: `${f.color}20`, color: f.color }}>
                     <Icon size={22} />

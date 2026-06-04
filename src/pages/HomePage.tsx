@@ -20,7 +20,7 @@ export default function HomePage() {
     <main>
       <Hero />
       <TrustBar />
-      <ProductsMarketplace limit={6} showHeader={true} />
+      <ProductsMarketplace limit={4} showHeader={true} />
       <WhyChooseUs />
       <ExportProcess />
       <ExportCountries />

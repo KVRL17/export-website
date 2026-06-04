@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowRight, FiArrowLeft, FiCheck, FiSend } from 'react-icons/fi';
-import emailjs from '@emailjs/browser';
 import { products } from '../data/products';
 import { useInquiryCart } from '../context/InquiryCartContext';
 
@@ -69,35 +68,46 @@ export default function BulkQuotePage() {
   const handleSubmit = async () => {
     setSubmitting(true);
     setError('');
-    const selectedNames = form.selectedProducts.map((id) => {
+
+    const selectedItems = form.selectedProducts.map((id) => {
       const p = products.find((pr) => pr.id === id);
       const qty = form.quantities[id] || p?.moq || 'N/A';
-      return `${p?.name}: ${qty}`;
-    }).join('\n');
+      return { name: p?.name || id, qty };
+    });
 
-    const templateParams = {
+    const payload = {
       company_name: form.companyName,
       buyer_name: form.buyerName,
       country: form.country,
       email: form.email,
       phone: form.phone,
-      products: selectedNames,
+      products: selectedItems.map((item) => `${item.name}: ${item.qty}`).join('\n'),
       delivery_port: form.deliveryPort,
       payment_terms: form.paymentTerms || 'Not specified',
       requirements: form.requirements || 'None',
       timestamp: new Date().toLocaleString(),
+      _subject: 'New Bulk Quote Request from Akshyaa Global Exports',
+      _template: 'table',
+      _captcha: 'false',
     };
 
     try {
-      await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
-        templateParams,
-        'YOUR_PUBLIC_KEY'
-      );
+      const response = await fetch('https://formsubmit.co/ajax/venkataramanakarri.official@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('FormSubmit request failed');
+      }
+
       setSubmitted(true);
     } catch {
-      setError('Failed to send inquiry. Please email us directly at exports@akshyaaglobal.com');
+      setError('Failed to send inquiry. Please email us directly at venkataramanakarri.official@gmail.com');
     } finally {
       setSubmitting(false);
     }

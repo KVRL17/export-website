@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import logo1 from '../images/logo1.jpg';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiShoppingCart, FiMenu, FiX, FiPhone, FiMail } from 'react-icons/fi';
@@ -37,11 +38,11 @@ export default function Navbar() {
             <div className="d-flex gap-4">
               <a href="tel:+919999999999" className="topbar-link">
                 <FiPhone size={13} />
-                <span>+91 99999 99999</span>
+                <span>+44 7763076666</span>
               </a>
-              <a href="mailto:exports@akshyaaglobal.com" className="topbar-link">
+              <a href="mailto:info@akshyaaglobalexport.com" className="topbar-link">
                 <FiMail size={13} />
-                <span>exports@akshyaaglobal.com</span>
+                <span>info@akshyaaglobalexport.com</span>
               </a>
             </div>
             <div className="d-none d-md-flex gap-3 align-items-center">
@@ -65,12 +66,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link to="/" className="nav-logo">
               <div className="nav-logo-icon">
-                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="38" height="38">
-                  <circle cx="20" cy="20" r="20" fill="#0A2540" />
-                  <path d="M20 8 L28 16 L28 28 L12 28 L12 16 Z" fill="#00A651" opacity="0.9"/>
-                  <path d="M16 14 Q20 10 24 14 Q28 18 24 22 Q20 26 16 22 Q12 18 16 14Z" fill="#FF6B00" opacity="0.8"/>
-                  <circle cx="20" cy="18" r="3" fill="white"/>
-                </svg>
+                <img src={logo1} alt="Akshyaa Global Exports logo" width={38} height={38} className="rounded" />
               </div>
               <div className="nav-logo-text">
                 <span className="nav-logo-name">Akshyaa</span>

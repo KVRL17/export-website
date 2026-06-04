@@ -1,3 +1,19 @@
+import basmatiRice1 from '../images/basmatirice1.jpg';
+import basmatiRice2 from '../images/basmatirice2.jpg';
+import basmatiRice3 from '../images/basmatirice3.jpg';
+import rice21 from '../images/rice21.jpg';
+import rice22 from '../images/rice22.jpg';
+import rice23 from '../images/rice23.jpg';
+import rc31 from '../images/rc31.jpg';
+import rc32 from '../images/rc32.jpg';
+import rc33 from '../images/rc33.jpg';
+import cp41 from '../images/cp41.jpg';
+import cp42 from '../images/cp42.jpg';
+import cp43 from '../images/cp43.jpg';
+import cf51 from '../images/cf51.jpg';
+import cf52 from '../images/cf52.jpg';
+import cf53 from '../images/cf53.jpg';
+
 export interface Product {
   id: string;
   slug: string;
@@ -30,14 +46,14 @@ export const products: Product[] = [
     moq: '25 MT',
     packaging: ['25 kg PP Bags', '50 kg Jute Bags', '5 kg Consumer Pack'],
     countries: ['USA', 'UK', 'UAE', 'Saudi Arabia', 'Qatar'],
-    image: 'https://images.pexels.com/photos/7421215/pexels-photo-7421215.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: basmatiRice1,
     gallery: [
-      'https://images.pexels.com/photos/7421215/pexels-photo-7421215.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/4110252/pexels-photo-4110252.jpeg?auto=compress&cs=tinysrgb&w=800',
+      basmatiRice1,
+      basmatiRice2,
+      basmatiRice3,
     ],
-    description: 'Long-grain aromatic basmati rice with natural fragrance, aged to perfection.',
-    longDescription: 'Our Premium Basmati Rice is sourced from the fertile plains of Punjab and Haryana. Each grain is long, slender, and aromatic, with a distinctive nutty flavor that sets it apart. Aged for 12-24 months to enhance fragrance and cooking quality, it is ideal for biryanis, pilafs, and fine dining establishments worldwide.',
+    description: 'Premium Basmati Rice with long grains, natural aroma, and a fluffy finish.',
+    longDescription: 'Our Premium Basmati Rice is sourced from the fertile plains of Punjab and Haryana. Each long, slender grain is naturally aromatic, lightly aged, and prized for its soft texture and nutty fragrance. It is ideal for biryanis, pilafs, and premium culinary use where aroma and presentation matter most.',
     specifications: {
       'Grain Length': '8.30 mm (average)',
       'Length After Cooking': '16+ mm',
@@ -57,24 +73,25 @@ export const products: Product[] = [
     ],
     popular: true,
     newest: false,
-    priceRange: '$450 - $650 / MT',
+    priceRange: '€450 - €650 / MT',
   },
   {
     id: '2',
     slug: 'ir-64-parboiled-rice',
-    name: 'IR 64 Parboiled Rice',
+    name: 'Non-Basmati Rice',
     category: 'rice',
     grade: 'Export Grade A',
     moq: '25 MT',
     packaging: ['25 kg PP Bags', '50 kg Jute Bags'],
     countries: ['UK', 'USA', 'UAE', 'Malaysia', 'Singapore'],
-    image: 'https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: rice21,
     gallery: [
-      'https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/7421215/pexels-photo-7421215.jpeg?auto=compress&cs=tinysrgb&w=800',
+      rice21,
+      rice22,
+      rice23,
     ],
-    description: 'High-quality parboiled non-basmati rice with excellent cooking characteristics.',
-    longDescription: 'IR 64 Parboiled Rice is a popular non-basmati variety known for its firm texture, good taste, and high nutritional value. The parboiling process partially boils the rice in husk, locking in nutrients and giving the grain a golden yellow color. Ideal for African and Southeast Asian markets.',
+    description: 'Non-Basmati Rice with firm grains, excellent texture, and dependable cooking quality.',
+    longDescription: 'Our Non-Basmati Rice is a dependable IR 64 parboiled variety with firm grains, excellent cooking texture, and strong market appeal. The parboiling process preserves nutrients and gives the rice a golden appearance, making it a practical choice for food service, wholesale distribution, and large-scale cooking needs.',
     specifications: {
       'Variety': 'IR 64',
       'Type': 'Parboiled',
@@ -91,8 +108,9 @@ export const products: Product[] = [
     ],
     popular: false,
     newest: true,
-    priceRange: '$300 - $450 / MT',
+    priceRange: '€300 - €450 / MT',
   },
+  /*
   {
     id: '3',
     slug: 'sona-masoori-rice',
@@ -125,22 +143,24 @@ export const products: Product[] = [
     newest: false,
     priceRange: '$350 - $500 / MT',
   },
+  */
   {
     id: '4',
     slug: 'dry-red-chilli',
-    name: 'Dry Red Chilli (Teja S17)',
+    name: 'Dried Red Chillies',
     category: 'chillies',
     grade: 'Export Grade A',
     moq: '5 MT',
     packaging: ['25 kg PP Bags', '50 kg Bales', '10 kg Cartons'],
     countries: ['USA', 'UK', 'UAE', 'Qatar', 'Oman', 'Malaysia'],
-    image: 'https://images.pexels.com/photos/2821823/pexels-photo-2821823.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: rc33,
     gallery: [
-      'https://images.pexels.com/photos/2821823/pexels-photo-2821823.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/6316515/pexels-photo-6316515.jpeg?auto=compress&cs=tinysrgb&w=800',
+      rc31,
+      rc32,
+      rc33,
     ],
-    description: 'Premium Teja S17 variety red chillies with high pungency and deep red color.',
-    longDescription: 'Teja S17 is the most sought-after variety of red chilli globally, known for its extra high pungency (ASTA Color Value 100-120) and brilliant red color. Sourced from the chilli belt of Andhra Pradesh, each batch is carefully dried, cleaned, and sorted to meet international phytosanitary standards.',
+    description: 'Dried Red Chillies with deep red color, high pungency, and export-ready quality.',
+    longDescription: 'Our Dried Red Chillies are sourced from premium Teja S17 farms in Andhra Pradesh and selected for their deep red color, high pungency, and consistent export quality. Each batch is carefully dried, cleaned, and graded to meet international food safety and phytosanitary standards for spice manufacturers and wholesale buyers.',
     specifications: {
       'Variety': 'Teja S17',
       'ASTA Color Value': '100 - 120',
@@ -158,8 +178,9 @@ export const products: Product[] = [
     ],
     popular: true,
     newest: false,
-    priceRange: '$1,200 - $1,800 / MT',
+    priceRange: '€1,200 - €1,800 / MT',
   },
+  /*
   {
     id: '5',
     slug: 'guntur-sannam-chilli',
@@ -192,22 +213,24 @@ export const products: Product[] = [
     newest: true,
     priceRange: '$900 - $1,400 / MT',
   },
+  */
   {
     id: '6',
     slug: 'red-chilli-powder',
-    name: 'Red Chilli Powder',
+    name: 'Chilli Powder',
     category: 'powders',
     grade: 'Premium Export Grade',
     moq: '5 MT',
     packaging: ['1 kg PP Bags', '5 kg Tin', '25 kg PP Bags'],
     countries: ['USA', 'UK', 'UAE', 'Qatar', 'Oman', 'Singapore'],
-    image: 'https://images.pexels.com/photos/3296434/pexels-photo-3296434.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: cp43,
     gallery: [
-      'https://images.pexels.com/photos/3296434/pexels-photo-3296434.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/6316515/pexels-photo-6316515.jpeg?auto=compress&cs=tinysrgb&w=800',
+      cp41,
+      cp42,
+      cp43
     ],
-    description: 'Finely ground premium red chilli powder with consistent color value and pungency.',
-    longDescription: 'Our Red Chilli Powder is manufactured using state-of-the-art grinding technology to ensure uniform particle size, consistent color (ASTA 90-100), and precise pungency. Available in extra hot, hot, and mild variants. Manufactured under strict HACCP and GMP conditions.',
+    description: 'Chilli Powder with fine grinding, rich color, and consistent pungency.',
+    longDescription: 'Our Chilli Powder is produced with fine grinding technology to deliver uniform texture, rich color, and controlled pungency. Available in mild, hot, and extra-hot variants, it is suitable for spice blending, seasoning, sauces, and food processing applications under strict HACCP and GMP standards.',
     specifications: {
       'ASTA Color Value': '90 - 100',
       'Moisture': 'Max 10%',
@@ -223,7 +246,7 @@ export const products: Product[] = [
     ],
     popular: true,
     newest: false,
-    priceRange: '$1,500 - $2,500 / MT',
+    priceRange: '€1,500 - €2,500 / MT',
   },
   {
     id: '7',
@@ -234,13 +257,14 @@ export const products: Product[] = [
     moq: '3 MT',
     packaging: ['100g Shaker', '500g Bag', '1 kg Bag', '25 kg PP Bag'],
     countries: ['USA', 'UK', 'Italy', 'UAE', 'Australia'],
-    image: 'https://images.pexels.com/photos/1329546/pexels-photo-1329546.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: cf51,
     gallery: [
-      'https://images.pexels.com/photos/1329546/pexels-photo-1329546.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3296434/pexels-photo-3296434.jpeg?auto=compress&cs=tinysrgb&w=800',
+      cf51,
+      cf52,
+      cf53
     ],
-    description: 'Crushed red chilli flakes with seeds, ideal for pizza toppings and seasoning blends.',
-    longDescription: 'Our premium Red Chilli Flakes are produced by crushing dried Teja and Guntur chillies to achieve the ideal flake-to-seed ratio. Preferred by pizza chains, Italian restaurants, and seasoning manufacturers worldwide. Available in various mesh sizes and pungency levels.',
+    description: 'Red Chilli Flakes with bold heat, bright color, and a crisp texture for seasoning and toppings.',
+    longDescription: 'Our Red Chilli Flakes are made by crushing selected dried chillies to create bold flakes with bright color, crisp texture, and balanced heat. They are widely used in pizza toppings, seasoning blends, sauces, and ready-to-cook food products, with options available in different mesh sizes and pungency levels.',
     specifications: {
       'Type': 'Crushed with Seeds',
       'Mesh Size': '5-8 mm flakes',
@@ -255,12 +279,13 @@ export const products: Product[] = [
     ],
     popular: false,
     newest: true,
-    priceRange: '$1,800 - $2,800 / MT',
+    priceRange: '€1,800 - €2,800 / MT',
   },
+  /*
   {
     id: '8',
     slug: 'byadgi-chilli',
-    name: 'Byadgi Chilli (Kaddi)',
+    name: 'Chilli Flex',
     category: 'chillies',
     grade: 'Export Grade A',
     moq: '5 MT',
@@ -287,8 +312,9 @@ export const products: Product[] = [
     ],
     popular: false,
     newest: false,
-    priceRange: '$1,400 - $2,000 / MT',
+    priceRange: '€1,400 - €2,000 / MT',
   },
+  */
 ];
 
 export const getProductBySlug = (slug: string): Product | undefined =>
