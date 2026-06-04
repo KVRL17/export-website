@@ -90,11 +90,11 @@ export default function InquiryCartSidebar() {
             {items.length > 0 && (
               <div className="cart-footer">
                 <Link
-                  to="/bulk-quote"
+                  to="/cart-quote"
                   className="btn-cart-quote"
                   onClick={closeCart}
                 >
-                  Request Bulk Quote
+                  Request Cart Quote
                   <FiArrowRight size={16} />
                 </Link>
                 <button className="btn-cart-clear" onClick={clearCart}>

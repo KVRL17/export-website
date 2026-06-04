@@ -92,8 +92,8 @@ export default function Hero() {
               </div>
 
               <h1 className="hero-heading">
-                Export Premium Rice &<br />
-                <span className="hero-heading-accent">Red Chillies</span> Worldwide
+                <span className="hero-heading-line">Export Premium Rice &</span>
+                <span className="hero-heading-accent hero-heading-line">Red Chillies Worldwide</span>
               </h1>
 
               <p className="hero-subheading">

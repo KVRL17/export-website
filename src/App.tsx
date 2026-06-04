@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import BulkQuotePage from './pages/BulkQuotePage';
+import CartQuotePage from './pages/CartQuotePage';
 import ContactPage from './pages/ContactPage';
 import { BlogListPage, BlogPostPage } from './pages/BlogPage';
 
@@ -50,6 +51,7 @@ function AppContent() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/product/:slug" element={<ProductDetailPage />} />
           <Route path="/bulk-quote" element={<BulkQuotePage />} />
+          <Route path="/cart-quote" element={<CartQuotePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/blog" element={<BlogListPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />

@@ -38,18 +38,44 @@ const initialForm: FormData = {
   requirements: '',
 };
 
-export default function BulkQuotePage() {
+export interface BulkQuoteFormProps {
+  initialSelectedProducts?: string[];
+  initialQuantities?: Record<string, string>;
+  skipProductSelection?: boolean;
+}
+
+export function BulkQuoteForm({
+  initialSelectedProducts = [],
+  initialQuantities = {},
+  skipProductSelection = false,
+}: BulkQuoteFormProps) {
+  const { items } = useInquiryCart();
   const [step, setStep] = useState(0);
-  const [form, setForm] = useState<FormData>(initialForm);
+  const [form, setForm] = useState<FormData>({
+    ...initialForm,
+    selectedProducts: initialSelectedProducts,
+    quantities: initialQuantities,
+  });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
-  const { items } = useInquiryCart();
 
-  const updateField = (field: keyof FormData, value: string) =>
+  const skipSelection = skipProductSelection && initialSelectedProducts.length > 0;
+  const visibleSteps = skipSelection
+    ? ['Business Details', 'Quantity & Delivery', 'Requirements']
+    : steps;
+  const displayStep = step;
+  const isProductSelectionStep = !skipSelection && step === 1;
+  const isQuantityStep = step === (skipSelection ? 1 : 2);
+  const isRequirementsStep = step === (skipSelection ? 2 : 3);
+
+  const updateField = (field: keyof FormData, value: string) => {
+    setError('');
     setForm((prev) => ({ ...prev, [field]: value }));
+  };
 
   const toggleProduct = (id: string) => {
+    setError('');
     setForm((prev) => ({
       ...prev,
       selectedProducts: prev.selectedProducts.includes(id)
@@ -58,10 +84,30 @@ export default function BulkQuotePage() {
     }));
   };
 
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   const canNext = () => {
-    if (step === 0) return form.companyName && form.buyerName && form.country && form.email && form.phone;
-    if (step === 1) return form.selectedProducts.length > 0;
-    if (step === 2) return form.deliveryPort;
+    if (step === 0) {
+      return (
+        form.companyName.trim()
+        && form.buyerName.trim()
+        && form.country.trim()
+        && validateEmail(form.email)
+        && form.phone.trim()
+      );
+    }
+
+    if (isProductSelectionStep) {
+      return form.selectedProducts.length > 0;
+    }
+
+    if (isQuantityStep) {
+      const allQuantitiesValid = form.selectedProducts.every(
+        (id) => form.quantities[id]?.trim()
+      );
+      return form.deliveryPort.trim() && allQuantitiesValid;
+    }
+
     return true;
   };
 
@@ -69,11 +115,63 @@ export default function BulkQuotePage() {
     setSubmitting(true);
     setError('');
 
+    if (!form.selectedProducts.length) {
+      setError('Please select at least one product before submitting.');
+      setSubmitting(false);
+      return;
+    }
+
+    if (!validateEmail(form.email)) {
+      setError('Please enter a valid email address.');
+      setSubmitting(false);
+      return;
+    }
+
+    if (form.selectedProducts.some((id) => !form.quantities[id]?.trim())) {
+      setError('Please enter quantities for all selected products.');
+      setSubmitting(false);
+      return;
+    }
+
+    if (!form.deliveryPort.trim()) {
+      setError('Please provide the destination port.');
+      setSubmitting(false);
+      return;
+    }
+
     const selectedItems = form.selectedProducts.map((id) => {
       const p = products.find((pr) => pr.id === id);
       const qty = form.quantities[id] || p?.moq || 'N/A';
       return { name: p?.name || id, qty };
     });
+
+    const tableRows = selectedItems.map((item) => `
+      <tr>
+        <td style="padding:8px 10px; border:1px solid #dbe4ee;">${item.name}</td>
+        <td style="padding:8px 10px; border:1px solid #dbe4ee; text-align:center;">${item.qty}</td>
+      </tr>
+    `).join('');
+
+    const htmlMessage = `
+      <h2 style="font-family:Arial,sans-serif; color:#0A2540; margin-bottom:8px;">New Bulk Quote Request</h2>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin:0 0 12px;">A new bulk export inquiry has arrived from Akshyaa Global Exports.</p>
+      <table style="width:100%; border-collapse:collapse; font-family:Arial,sans-serif; border:1px solid #dbe4ee; background:#ffffff;">
+        <tr style="background:#0A2540; color:#ffffff; text-align:left;">
+          <th style="padding:10px; border:1px solid #dbe4ee;">Product</th>
+          <th style="padding:10px; border:1px solid #dbe4ee; text-align:center;">Quantity</th>
+        </tr>
+        ${tableRows}
+      </table>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin-top:12px;"><strong>Company:</strong> ${form.companyName}</p>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin:4px 0;"><strong>Buyer:</strong> ${form.buyerName}</p>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin:4px 0;"><strong>Country:</strong> ${form.country}</p>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin:4px 0;"><strong>Email:</strong> ${form.email}</p>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin:4px 0;"><strong>Phone:</strong> ${form.phone}</p>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin:4px 0;"><strong>Destination Port:</strong> ${form.deliveryPort}</p>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin:4px 0;"><strong>Payment Terms:</strong> ${form.paymentTerms || 'Not specified'}</p>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin:4px 0;"><strong>Requirements:</strong> ${form.requirements || 'None'}</p>
+      <p style="font-family:Arial,sans-serif; color:#334155; margin-top:12px;"><strong>Submitted At:</strong> ${new Date().toLocaleString()}</p>
+    `;
 
     const payload = {
       company_name: form.companyName,
@@ -86,7 +184,9 @@ export default function BulkQuotePage() {
       payment_terms: form.paymentTerms || 'Not specified',
       requirements: form.requirements || 'None',
       timestamp: new Date().toLocaleString(),
-      _subject: 'New Bulk Quote Request from Akshyaa Global Exports',
+      _subject: `New Bulk Quote Request from ${form.buyerName} (${form.companyName || 'No Company'})`,
+      _replyto: form.email,
+      _message: htmlMessage,
       _template: 'table',
       _captcha: 'false',
     };
@@ -161,10 +261,10 @@ export default function BulkQuotePage() {
         <div className="quote-form-wrapper">
           {/* Step indicators */}
           <div className="step-indicators">
-            {steps.map((s, i) => (
-              <div key={s} className={`step-indicator ${i === step ? 'active' : i < step ? 'done' : ''}`}>
+            {visibleSteps.map((s, i) => (
+              <div key={s} className={`step-indicator ${i === displayStep ? 'active' : i < displayStep ? 'done' : ''}`}>
                 <div className="step-bubble">
-                  {i < step ? <FiCheck size={14} /> : <span>{i + 1}</span>}
+                  {i < displayStep ? <FiCheck size={14} /> : <span>{i + 1}</span>}
                 </div>
                 <span className="step-label">{s}</span>
               </div>
@@ -174,7 +274,7 @@ export default function BulkQuotePage() {
           {/* Form Steps */}
           <div className="quote-form-body">
             <AnimatePresence mode="wait">
-              {step === 0 && (
+              {displayStep === 0 && (
                 <motion.div
                   key="step0"
                   initial={{ opacity: 0, x: 30 }}
@@ -241,7 +341,7 @@ export default function BulkQuotePage() {
                 </motion.div>
               )}
 
-              {step === 1 && (
+              {isProductSelectionStep && (
                 <motion.div
                   key="step1"
                   initial={{ opacity: 0, x: 30 }}
@@ -276,7 +376,27 @@ export default function BulkQuotePage() {
                 </motion.div>
               )}
 
-              {step === 2 && (
+              {skipSelection && isQuantityStep && (
+                <motion.div
+                  key="step1-skip"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  className="step-content"
+                >
+                  <h3 className="step-title">Selected Products</h3>
+                  <div className="quote-summary mt-3">
+                    {form.selectedProducts.map((id) => {
+                      const p = products.find((pr) => pr.id === id);
+                      return (
+                        <div key={id} className="summary-row"><strong>{p?.name || id}:</strong> {form.quantities[id] || p?.moq || 'N/A'}</div>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              )}
+
+              {isQuantityStep && (
                 <motion.div
                   key="step2"
                   initial={{ opacity: 0, x: 30 }}
@@ -335,7 +455,7 @@ export default function BulkQuotePage() {
                 </motion.div>
               )}
 
-              {step === 3 && (
+              {isRequirementsStep && (
                 <motion.div
                   key="step3"
                   initial={{ opacity: 0, x: 30 }}
@@ -367,11 +487,11 @@ export default function BulkQuotePage() {
                     <div className="summary-row"><strong>Products:</strong> {form.selectedProducts.length} selected</div>
                     <div className="summary-row"><strong>Destination:</strong> {form.deliveryPort}</div>
                   </div>
-
-                  {error && <div className="alert alert-danger mt-3">{error}</div>}
                 </motion.div>
               )}
             </AnimatePresence>
+
+            {error && <div className="alert alert-danger mt-3">{error}</div>}
           </div>
 
           {/* Navigation */}
@@ -379,12 +499,12 @@ export default function BulkQuotePage() {
             <button
               className="btn-step-back"
               onClick={() => setStep((s) => Math.max(0, s - 1))}
-              disabled={step === 0}
+              disabled={displayStep === 0}
             >
               <FiArrowLeft size={16} /> Back
             </button>
 
-            {step < 3 ? (
+            {displayStep < visibleSteps.length - 1 ? (
               <button
                 className="btn-step-next"
                 onClick={() => setStep((s) => s + 1)}
@@ -408,4 +528,8 @@ export default function BulkQuotePage() {
       </div>
     </main>
   );
+}
+
+export default function BulkQuotePage() {
+  return <BulkQuoteForm />;
 }

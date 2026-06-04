@@ -1,26 +1,71 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPhone, FiMail, FiMapPin, FiArrowRight } from 'react-icons/fi';
 import { FaWhatsapp, FaLinkedin, FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import companyLogo from '../images/logo.jpg';
 
 const productLinks = [
   { label: 'Premium Basmati Rice', slug: 'basmati-rice' },
-  { label: 'Non-Basmati Rice', slug: 'non-basmati-rice' },
-  { label: 'Dried Red Chilles', slug: 'dry-red-chillies' },
+  { label: 'Non-Basmati Rice', slug: 'ir-64-parboiled-rice' },
+  { label: 'Dried Red Chillies', slug: 'dry-red-chilli' },
   { label: 'Red Chilli Powder', slug: 'red-chilli-powder' },
   { label: 'Chilli Flakes', slug: 'chilli-flakes' },
 ];
 
 const quickLinks = [
-  // { label: 'About Us', to: '/#about' },
+  { label: 'Home', to: '/' },
   { label: 'Products', to: '/products' },
-  { label: 'Export Countries', to: '/#countries' },
-  { label: 'Certifications', to: '/#certifications' },
+  { label: 'Export Countries', href: '/#countries' },
+  { label: 'Certifications', href: '/#certifications' },
   { label: 'Bulk Quote', to: '/bulk-quote' },
   { label: 'Contact Us', to: '/contact' },
   { label: 'Blog', to: '/blog' },
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [subscribeMessage, setSubscribeMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = email.trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setSubscribeMessage('Please enter a valid business email.');
+      return;
+    }
+
+    setSubmitting(true);
+    setSubscribeMessage('');
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/venkataramanakarri.official@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          email: trimmed,
+          message: 'I would like to subscribe to receive export updates, product availability updates, and company news from Akshyaa Global Exports.',
+          _subject: 'New Newsletter Subscription Request',
+          _replyto: trimmed,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      if (!response.ok) throw new Error('Subscription request failed');
+
+      setSubscribeMessage('Thank you for subscribing. We will send export updates to your email soon.');
+      setEmail('');
+    } catch {
+      setSubscribeMessage('Subscription failed. Please email us directly at info@akshyaaglobalexport.com');
+    } finally {
+      setSubmitting(false);
+    }
+  };
   return (
     <footer className="site-footer">
       <div className="footer-main">
@@ -30,12 +75,7 @@ export default function Footer() {
             <div className="col-lg-4 col-md-6">
               <div className="footer-brand">
                 <div className="d-flex align-items-center gap-3 mb-4">
-                  <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
-                    <circle cx="20" cy="20" r="20" fill="#00A651" />
-                    <path d="M20 8 L28 16 L28 28 L12 28 L12 16 Z" fill="white" opacity="0.9"/>
-                    <path d="M16 14 Q20 10 24 14 Q28 18 24 22 Q20 26 16 22 Q12 18 16 14Z" fill="#FF6B00" opacity="0.9"/>
-                    <circle cx="20" cy="18" r="3" fill="white"/>
-                  </svg>
+                  <img src={companyLogo} alt="Akshyaa Global Exports" width="44" height="44" style={{ borderRadius: 10, objectFit: 'cover' }} />
                   <div>
                     <div className="footer-logo-name">Akshyaa Global Exports</div>
                     <div className="footer-logo-sub">India's Trusted Export Partner</div>
@@ -74,11 +114,18 @@ export default function Footer() {
               <h5 className="footer-heading">Quick Links</h5>
               <ul className="footer-links">
                 {quickLinks.map((l) => (
-                  <li key={l.to}>
-                    <Link to={l.to}>
-                      <FiArrowRight size={13} />
-                      {l.label}
-                    </Link>
+                  <li key={l.label}>
+                    {l.href ? (
+                      <a href={l.href}>
+                        <FiArrowRight size={13} />
+                        {l.label}
+                      </a>
+                    ) : (
+                      <Link to={l.to!}>
+                        <FiArrowRight size={13} />
+                        {l.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -113,10 +160,17 @@ export default function Footer() {
               </div>
               <div className="footer-newsletter">
                 <h6>Get Export Updates</h6>
-                <div className="newsletter-form">
-                  <input type="email" placeholder="Your business email" />
-                  <button type="submit">Subscribe</button>
-                </div>
+                <form className="newsletter-form" onSubmit={handleSubscribe}>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); setSubscribeMessage(''); }}
+                    placeholder="Your business email"
+                    required
+                  />
+                  <button type="submit" disabled={submitting}>{submitting ? 'Sending...' : 'Subscribe'}</button>
+                </form>
+                {subscribeMessage && <p className="newsletter-message">{subscribeMessage}</p>}
               </div>
             </div>
           </div>

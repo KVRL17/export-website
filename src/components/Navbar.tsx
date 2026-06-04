@@ -47,7 +47,7 @@ export default function Navbar() {
             </div>
             <div className="d-none d-md-flex gap-3 align-items-center">
               <span className="topbar-badge">APEDA Registered</span>
-              <span className="topbar-badge">ISO 9001:2015</span>
+              <span className="topbar-badge">ISO 9001:2025</span>
               <span className="topbar-badge">FSSAI Certified</span>
             </div>
           </div>
