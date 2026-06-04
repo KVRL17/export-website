@@ -179,7 +179,7 @@ export default function ProductsMarketplace({ limit, showHeader = true }: Produc
                       className="btn-product-inquiry"
                       onClick={() => addItem(product)}
                     >
-                      <FiPlus size={14} /> Add to Inquiry
+                      <FiPlus size={14} /> Add to Cart
                     </button>
                   </div>
                 </div>

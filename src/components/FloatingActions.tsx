@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion';
 import { FaWhatsapp } from 'react-icons/fa';
 import { FiPhone, FiShoppingCart } from 'react-icons/fi';
+import { useLocation } from 'react-router-dom';
 import { useInquiryCart } from '../context/InquiryCartContext';
 
 export default function FloatingActions() {
   const { count, toggleCart } = useInquiryCart();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   return (
     <div className="floating-actions">
@@ -32,17 +35,18 @@ export default function FloatingActions() {
         <FiPhone size={20} />
       </motion.a>
 
-      {/* Inquiry Cart */}
-      <motion.button
-        className="fab fab-cart"
-        onClick={toggleCart}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        title="Inquiry Cart"
-      >
-        <FiShoppingCart size={20} />
-        {count > 0 && <span className="fab-badge">{count}</span>}
-      </motion.button>
+      {!isHomePage && (
+        <motion.button
+          className="fab fab-cart"
+          onClick={toggleCart}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          title="Cart"
+        >
+          <FiShoppingCart size={20} />
+          {count > 0 && <span className="fab-badge">{count}</span>}
+        </motion.button>
+      )}
     </div>
   );
 }

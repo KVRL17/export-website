@@ -140,9 +140,9 @@ export default function ProductDetailPage() {
                     disabled={isAdded}
                   >
                     {isAdded ? (
-                      <><FiCheck size={16} /> Added to Inquiry</>
+                      <><FiCheck size={16} /> Added to Cart</>
                     ) : (
-                      <><FiPlus size={16} /> Add to Inquiry</>
+                      <><FiPlus size={16} /> Add to Cart</>
                     )}
                   </button>
                   <Link to="/bulk-quote" className="btn-detail-quote">
@@ -207,7 +207,7 @@ export default function ProductDetailPage() {
           onClick={() => addItem(product)}
           disabled={isAdded}
         >
-          {isAdded ? <><FiCheck size={16} /> Added to Inquiry</> : <><FiPlus size={16} /> Add to Inquiry</>}
+          {isAdded ? <><FiCheck size={16} /> Added to Cart</> : <><FiPlus size={16} /> Add to Cart</>}
         </button>
       </div>
     </main>

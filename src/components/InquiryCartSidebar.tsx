@@ -28,7 +28,7 @@ export default function InquiryCartSidebar() {
               <div>
                 <h3 className="cart-title">
                   <FiPackage size={20} />
-                  Inquiry Cart
+                  Cart
                 </h3>
                 <p className="cart-subtitle">{items.length} product{items.length !== 1 ? 's' : ''} added</p>
               </div>
@@ -42,7 +42,7 @@ export default function InquiryCartSidebar() {
                 <div className="cart-empty">
                   <FiPackage size={48} opacity={0.3} />
                   <p>No products added yet.</p>
-                  <p className="small">Browse products and click "Add to Inquiry".</p>
+                  <p className="small">Browse products and click "Add to Cart".</p>
                   <Link to="/products" className="btn-primary-custom" onClick={closeCart}>
                     Browse Products
                   </Link>

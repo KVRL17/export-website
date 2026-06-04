@@ -58,7 +58,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
                   style={{ width: `${Math.min(progress, 100)}%` }}
                 />
               </div>
-              <span className="preloader-progress-text">{Math.min(Math.round(progress), 100)}%</span>
+              <span className="preloader-progress-text">Loading...</span>
             </div>
           </div>
         </motion.div>
