@@ -72,7 +72,7 @@ export default function InquiryCartSidebar() {
                           className="cart-item-qty"
                           value={item.quantity}
                           onChange={(e) => updateItem(item.product.id, { quantity: e.target.value })}
-                          placeholder="Quantity (e.g. 25 MT)"
+                          placeholder="Quantity (e.g. 0.5 MT)"
                         />
                       </div>
                       <button
