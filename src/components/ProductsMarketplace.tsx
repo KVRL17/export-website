@@ -169,8 +169,6 @@ export default function ProductsMarketplace({ limit, showHeader = true }: Produc
                     )}
                   </div>
 
-                  <div className="product-price">{product.priceRange}</div>
-
                   <div className="product-actions">
                     <Link to={`/product/${product.slug}`} className="btn-product-view">
                       <FiArrowRight size={14} /> View Details

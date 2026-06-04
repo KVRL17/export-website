@@ -969,13 +969,6 @@ a { text-decoration: none; color: inherit; }
   font-weight: 500;
 }
 
-.product-price {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 14px;
-}
-
 .product-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1980,15 +1973,6 @@ a { text-decoration: none; color: inherit; }
 }
 
 .detail-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
-
-.detail-price {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--accent);
-  margin-bottom: 20px;
-}
-
-.detail-price-note { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; }
 
 .detail-meta-grid {
   display: grid;

@@ -86,8 +86,6 @@ export default function ProductDetailPage() {
                 <h1 className="detail-title">{product.name}</h1>
                 <p className="detail-desc">{product.longDescription}</p>
 
-                <div className="detail-price">{product.priceRange} <span className="detail-price-note">(Indicative FOB Price)</span></div>
-
                 <div className="detail-meta-grid">
                   <div className="detail-meta-item">
                     <FiPackage size={16} />
