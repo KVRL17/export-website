@@ -6,7 +6,6 @@ import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import InquiryCartSidebar from './components/InquiryCartSidebar';
-import FloatingActions from './components/FloatingActions';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -59,7 +58,6 @@ function AppContent() {
       </PageTransition>
       <Footer />
       <InquiryCartSidebar />
-      <FloatingActions />
     </div>
   );
 }
